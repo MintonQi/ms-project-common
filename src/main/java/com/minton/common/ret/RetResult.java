@@ -4,6 +4,7 @@ public class RetResult {
 
     private final static String SUCCESS = "success";
 
+
     public static <T> RetInfo<T> retSuccess() {
         return new RetInfo<T>().setCode(RetCodeEnum.SUCCESS.code).setMsg(SUCCESS);
     }
@@ -13,7 +14,7 @@ public class RetResult {
     }
 
     public static <T> RetInfo<T> retError(String message) {
-        return new RetInfo<T>().setCode(RetCodeEnum.FAIL.code).setMsg(SUCCESS);
+        return new RetInfo<T>().setCode(RetCodeEnum.FAIL.code).setMsg(message);
     }
 
     public static <T> RetInfo<T> retInfo(int code, String msg) {
