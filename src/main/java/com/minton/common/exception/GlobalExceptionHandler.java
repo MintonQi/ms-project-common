@@ -6,9 +6,11 @@ import com.minton.common.ret.RetInfo;
 import com.minton.common.ret.RetResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.HttpMediaTypeException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 
+import javax.security.sasl.AuthenticationException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -52,6 +55,34 @@ public class GlobalExceptionHandler {
     public RetInfo BadSqlGrammarExceptionHandler(BadSqlGrammarException ex){
         log.info("badSqlGrammarException:[exception:{}]", ex.getMessage());
         return RetResult.retError("SQL语句错误");
+    }
+
+
+
+    /**
+     * HTTP解析请求参数异常
+     *
+     * @param e e
+     * @return res
+     */
+    @ExceptionHandler(value = HttpMessageNotReadableException.class)
+    @ResponseStatus(HttpStatus.OK)
+    public RetInfo httpMessageNotReadableException(HttpMessageNotReadableException e) {
+        log.error("httpMessageNotReadableException:[e:{}]", e.getMessage());
+        return RetResult.retError("http解析请求参数异常");
+    }
+
+    /**
+     * 登陆授权异常处理
+     *
+     * @param exception exception
+     * @return res
+     */
+    @ExceptionHandler(value = AuthenticationException.class)
+    @ResponseStatus(HttpStatus.OK)
+    public RetInfo authenticationExceptionHandler(AuthenticationException exception) {
+        log.error("authenticationExceptionHandler:[exception:{}]", exception.getMessage());
+        return RetResult.retError("authenticationExceptionHandler");
     }
 
     /**
