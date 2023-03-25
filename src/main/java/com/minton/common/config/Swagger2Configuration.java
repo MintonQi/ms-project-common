@@ -29,8 +29,8 @@ public class Swagger2Configuration {
         return new ApiInfoBuilder()
                 .title("xx测试的接口文档")
                 .description("xx相关接口的文档")
-                .termsOfServiceUrl("http://localhost:8081/hello")
-                .version("1.0")
+//                .termsOfServiceUrl("http://localhost:8081/")
+//                .version("1.0")
                 .build();
     }
 }
