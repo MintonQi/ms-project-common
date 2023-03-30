@@ -49,6 +49,11 @@ public class GlobalExceptionHandler {
         return RetResult.retError("参数错误");
     }
 
+    /**
+     *
+     * @param ex
+     * @return RetInfo
+     */
 
     @ExceptionHandler(value = BadSqlGrammarException.class)
     @ResponseStatus(HttpStatus.OK)
